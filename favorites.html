@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="he">
+<head><meta charset="UTF-8"><title>המועדפים שלי</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<div class="container">
+  <div id="user-info"></div>
+  <h1>המועדפים שלי</h1>
+  <div>
+    <label>מיון:
+      <select id="sortSelect">
+        <option value="name">שם</option>
+        <option value="id">תעודת זהות</option>
+      </select>
+    </label>
+    <button id="download">הורד CSV</button>
+  </div>
+  <div id="favorites"></div>
+  <p><a href="index.html">חזרה לחיפוש</a></p>
+</div>
+<script src="favorites.js"></script>
+</body>
+</html>

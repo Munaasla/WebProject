@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="he">
+<head><meta charset="UTF-8"><title>זירת הקרבות</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<div class="container">
+  <div id="user-info"></div>
+  <h1>זירת הקרבות</h1>
+  <div style="margin:10px 0">
+    <a href="/arena/vs-bot.html">קרב מול בוט</a> ·
+    <a href="/arena/random-vs-player.html">קרב מול שחקן</a> ·
+    <a href="/arena/leaderboard.html">דירוג שחקנים</a>
+  </div>
+  <div id="output">בחרו פעולה מהלינקים למעלה.</div>
+  <p><a href="index.html">חזרה לחיפוש</a></p>
+</div>
+<script>
+fetch('/api/user').then(r=>r.json()).then(u=>{
+  document.getElementById('user-info').innerHTML=`שלום, ${u.name}! <a href="/logout">התנתק</a>`;
+}).catch(()=>location.href='/home.html');
+</script>
+</body>
+</html>

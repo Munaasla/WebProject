@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>דף בית (ציבורי)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>ברוכים הבאים</h1>
+    <p>דף ציבורי. רק משתמשים מחוברים יכולים להיכנס לדפי האפליקציה.</p>
+
+    <h3>סטודנטים</h3>
+    <div id="students">טוען...</div>
+
+    <p style="margin-top:16px">
+      <a href="register.html">הרשמה</a> ·
+      <a href="login.html">התחברות</a>
+    </p>
+  </div>
+
+<script>
+fetch('/api/students')
+  .then(r => r.json())
+  .then(data => {
+    const div = document.getElementById('students');
+    div.innerHTML = `
+      <p><strong>קורס:</strong> ${data.course}</p>
+      <p><strong>פרויקט:</strong> ${data.project}</p>
+      <ul>${data.students.map(s => `<li>${s.name} — ${s.id}</li>`).join('')}</ul>
+      <p>${data.about}</p>
+    `;
+  })
+  .catch(() => document.getElementById('students').textContent = 'טעינה נכשלה.');
+</script>
+</body>
+</html>

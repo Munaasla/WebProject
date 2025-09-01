@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>הרשמת משתמש</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>הרשמת משתמש</h1>
+  <form id="registerForm">
+    <input type="text" name="name" placeholder="שם מלא" required maxlength="50">
+    <input type="email" name="email" placeholder="אימייל" required>
+    <input type="password" name="password" placeholder="סיסמה" required>
+    <input type="password" name="confirm" placeholder="אישור סיסמה" required>
+    <button type="submit">הרשם</button>
+  </form>
+  <div id="msg" class="error"></div>
+  <p><a href="login.html">חזרה להתחברות</a></p>
+</div>
+<script>
+const form = document.getElementById('registerForm');
+const msg  = document.getElementById('msg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = '';
+  const d = Object.fromEntries(new FormData(form).entries());
+  if (d.password !== d.confirm) { 
+    msg.textContent = 'הסיסמאות אינן תואמות.'; 
+    return; 
+  }
+  try {
+    const r = await fetch('/api/register', {   
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ name: d.name.trim(), email: d.email.trim(), password: d.password })
+    });
+    const text = await r.text();
+    if (!r.ok) {
+      msg.textContent = text || `שגיאת שרת (${r.status})`;
+      return; 
+    }
+    location.href = '/index.html';
+  } catch (err) {
+    console.error('REGISTER FETCH ERROR:', err);
+    msg.textContent = 'שגיאת רשת/שרת';
+  }
+});
+</script>
+</body>
+</html>
