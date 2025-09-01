@@ -1,0 +1,9 @@
+{
+  "course": "Web Dev",
+  "project": "Pokemon Search & Arena",
+  "students": [
+    { "name": "מונא עאסלה ", "id": "212814149" },
+    { "name": "מואדה חרבגי", "id": "324885995" }
+  ],
+  "about": "A full-stack Node.js app using PokeAPI, with auth, favorites, and battle arena."
+}
